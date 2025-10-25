@@ -48,22 +48,22 @@ serve(async (req) => {
               content: `You are a senior product marketer. Write ONE tight paragraph in April Dunford style.
 
 Rules:
-- ≤55 words. Plain language. No buzzwords. No superlatives (best, fastest). No filler.
-- BANNED WORDS: innovative, seamless, cutting-edge, next-gen, reimagine, transform, world-class, best-in-class, empower, robust, at scale, leverage, optimize (unless tied to a metric).
-- Lead with the buyer's situation and sharpest pain. Name the category clearly.
-- Contrast against the named competitor using ONE concrete differentiator (feature, workflow, data, or proof).
-- Where possible, include a credible proof point (metric, certification, customer).
+- ≤55 words. Plain language. No buzzwords/superlatives.
+- DO NOT name competitors or critique them.
+- Use neutral category contrast only: say "compared with typical [category] tools" or "versus manual/spreadsheet workflows".
+- Keep a single, concrete differentiator and (if available) a brief proof fragment.
 
-Structure to follow (but keep it flowing as one paragraph):
-For [target customer] who [need/opportunity], the [product name] is a [category] that [key benefit]. Unlike [primary competitor], our product [primary differentiator + mini proof if available].
+Structure (one paragraph):
+For [target customer] who [need/opportunity], the [product name] is a [category] that [key benefit]. Compared with typical [category] tools, it [primary differentiator + optional proof].
 
 Inputs:
 - Product Name: ${productName}
 - Target Audience: ${targetAudience}
 - Pain Points: ${painPoints}
 - Product Benefit: ${productBenefit}
-- Competitors: ${competitors}
-- Differentiators: ${differentiators}`
+- Differentiators: ${differentiators}
+- Proof Points (optional): (not provided)
+- Category hint (optional): ${competitors}`
             }
           ]
         }),
