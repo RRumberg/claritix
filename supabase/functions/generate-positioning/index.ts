@@ -49,11 +49,11 @@ serve(async (req) => {
 
 Rules:
 - ≤55 words. Plain language. No buzzwords/superlatives.
-- DO NOT name competitors or critique them. If the inputs include brand names, still DO NOT mention them. Use "compared with typical [category] tools" instead. Never use "Unlike <brand>".
-- Use neutral category contrast only: say "compared with typical [category] tools" or "versus manual/spreadsheet workflows".
-- Keep a single, concrete differentiator and (if available) a brief proof fragment.
+- DO NOT name or reference any competitors or brands from the inputs.
+- If contrast is needed, use neutral phrasing: "compared with typical [category] tools" or "versus manual spreadsheet workflows".
+- Keep one concrete differentiator and, if available, a brief proof point.
 
-Structure (one paragraph):
+Structure (single paragraph):
 For [target customer] who [need/opportunity], the [product name] is a [category] that [key benefit]. Compared with typical [category] tools, it [primary differentiator + optional proof].
 
 Inputs:
