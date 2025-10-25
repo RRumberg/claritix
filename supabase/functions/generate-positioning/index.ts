@@ -48,7 +48,8 @@ serve(async (req) => {
               content: `You are a senior product marketer. Write ONE tight paragraph in April Dunford style.
 
 Rules:
-- ≤55 words. Plain language. No buzzwords (innovative, seamless, next-gen). No superlatives (best, fastest). No filler.
+- ≤55 words. Plain language. No buzzwords. No superlatives (best, fastest). No filler.
+- BANNED WORDS: innovative, seamless, cutting-edge, next-gen, reimagine, transform, world-class, best-in-class, empower, robust, at scale, leverage, optimize (unless tied to a metric).
 - Lead with the buyer's situation and sharpest pain. Name the category clearly.
 - Contrast against the named competitor using ONE concrete differentiator (feature, workflow, data, or proof).
 - Where possible, include a credible proof point (metric, certification, customer).
