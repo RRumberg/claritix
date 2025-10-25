@@ -118,13 +118,17 @@ Inputs:
             },
             {
               role: "user",
-              content: `Return 3 taglines as plain text. Each on its own line. No bullets, no asterisks, no dashes, no numbering, no markdown, no quotes. Each ≤8 words. Tone: confident, professional.
+              content: `You are a senior product marketer. Return 3 distinct taglines as PLAIN TEXT, one per line, no bullets, no numbers, no quotes, no punctuation at the end. Each ≤8 words.
+
+Rules:
+- Reflect the ICP's top pain and our key differentiator.
+- Avoid clichés ("transform", "reimagine", "next-gen"), rhymes, or wordplay.
 
 Inputs:
 - Product Name: ${productName}
 - Target Audience: ${targetAudience}
-- Product Benefit: ${productBenefit}
-- Differentiators: ${differentiators}`
+- Top Pain: ${painPoints}
+- Differentiator: ${differentiators}`
             }
           ]
         }),
