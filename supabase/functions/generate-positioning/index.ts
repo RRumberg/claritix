@@ -41,31 +41,26 @@ serve(async (req) => {
           temperature: 0.2,
           messages: [
             {
-              role: "system",
-              content: "You are a strategic marketing expert. Create clear, compelling positioning statements."
-            },
-            {
               role: "user",
-              content: `You are David Ogilvy meets April Dunford. Write ONE tight paragraph.
+              content: `Context: We're building ${productName}, targeted at ${targetAudience}. The product helps them ${productBenefit}.
 
-Rules:
-- ≤55 words. Plain language. No buzzwords (innovative, seamless, next-gen), no superlatives (best, fastest).
-- Lead with the buyer's felt moment (emotion/pain). Name the category clearly.
-- Do NOT name competitors. Use neutral contrast: "compared with typical [category] tools" or "versus manual spreadsheets".
-- State ONE concrete differentiator and, if available, a short proof fragment (metric, certification, named capability).
-- Return plain text only (no bullets/markdown).
+Task: Write a **Positioning Statement** in the style of David Ogilvy. Make it emotionally resonant, short, punchy, and specific — like a copywriter who deeply understands the customer's pain and aspiration.
 
-Structure (flow as one paragraph):
-For [target customer] who [urgent situation/pain], the [product name] is a [category] that [specific outcome]. Compared with typical [category] tools, it [single differentiator + optional proof].
+Guidelines:
+- Avoid buzzwords and generic jargon.
+- Speak directly to the *emotional core* of the customer.
+- Prioritize clarity over cleverness.
+- Use brand tone that is confident, intelligent, and empathetic.
+- Output 3 tight variations, each under 20 words.
+
+Constraints:
+Don't use corporate language like "synergy," "cutting-edge," or "revolutionary."
 
 Inputs:
-- Product Name: ${productName}
 - Target Audience: ${targetAudience}
 - Top 3 Pain Points: ${painPoints}
 - Product Benefit: ${productBenefit}
-- Differentiators: ${differentiators}
-- Proof Points (optional): (not provided)
-- Category hint (optional): ${competitors}`
+- Differentiators: ${differentiators}`
             }
           ]
         }),
