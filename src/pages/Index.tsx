@@ -330,7 +330,7 @@ const Index = () => {
 
             <Card className="p-8 shadow-lg transition-shadow hover:shadow-xl">
               <h3 className="mb-4 text-xl font-semibold text-primary">
-                AI-powered insights
+                Messaging insights
               </h3>
               <div className="min-h-[120px] rounded-lg bg-muted/50 p-4">
                 {insights ? (
