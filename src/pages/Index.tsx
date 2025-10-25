@@ -149,102 +149,114 @@ const Index = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-primary/10 via-background to-accent/10 p-6">
+    <div className="min-h-screen bg-background p-6">
       <div className="mx-auto max-w-7xl">
-        <header className="mb-8 text-center">
-          <div className="mb-4 inline-flex items-center gap-2 rounded-full bg-primary/10 px-4 py-2">
-            <Sparkles className="h-5 w-5 text-primary" />
-            <span className="text-sm font-medium text-primary">AI-Powered</span>
-          </div>
-          <h1 className="mb-2 text-5xl font-bold tracking-tight">
+        <header className="mb-8">
+          <h1 className="mb-2 text-4xl font-bold tracking-tight">
             Claritix
           </h1>
-          <p className="text-lg text-muted-foreground">
+          <p className="text-base text-muted-foreground">
             Turn vague product descriptions into clear messaging that wins markets, not just meetings.
           </p>
         </header>
 
         <div className="grid gap-8 lg:grid-cols-2">
           {/* Input Section */}
-          <Card className="p-8 shadow-lg transition-shadow hover:shadow-xl">
-            <h2 className="mb-6 text-2xl font-semibold">Product Information</h2>
+          <Card className="p-6 shadow-sm">
+            <h2 className="mb-6 flex items-center gap-2 text-xl font-semibold">
+              <span>✨</span>
+              Product Information
+            </h2>
             
-            <div className="space-y-6">
+            <div className="space-y-4">
               <div className="space-y-2">
-                <Label htmlFor="productName">Product Name</Label>
+                <Label htmlFor="productName" className="flex items-center gap-2">
+                  <span>⚡</span>
+                  Product Name
+                </Label>
                 <Input
                   id="productName"
-                  placeholder="Enter your product name"
+                  placeholder="e.g., ClaritIX"
                   value={productName}
                   onChange={(e) => setProductName(e.target.value)}
-                  className="transition-all focus:ring-2 focus:ring-primary"
                 />
               </div>
 
               <div className="space-y-2">
-                <Label htmlFor="targetAudience">Target Audience</Label>
-                <Textarea
+                <Label htmlFor="targetAudience" className="flex items-center gap-2">
+                  <span>😊</span>
+                  Target Audience
+                </Label>
+                <Input
                   id="targetAudience"
-                  placeholder="Describe your ideal customer and target market"
+                  placeholder="e.g., SaaS founders, Product managers"
                   value={targetAudience}
                   onChange={(e) => setTargetAudience(e.target.value)}
-                  rows={3}
-                  className="resize-none transition-all focus:ring-2 focus:ring-primary"
                 />
               </div>
 
               <div className="space-y-2">
-                <Label htmlFor="painPoints">Top 3 Pain Points</Label>
+                <Label htmlFor="painPoints" className="flex items-center gap-2">
+                  <span>⚠️</span>
+                  Top 3 Pain Points
+                </Label>
                 <Textarea
                   id="painPoints"
-                  placeholder="What problems does your product solve?"
+                  placeholder="Describe the main challenges your target audience faces..."
                   value={painPoints}
                   onChange={(e) => setPainPoints(e.target.value)}
                   rows={3}
-                  className="resize-none transition-all focus:ring-2 focus:ring-primary"
+                  className="resize-none"
                 />
               </div>
 
               <div className="space-y-2">
-                <Label htmlFor="productBenefit">Product Benefit</Label>
+                <Label htmlFor="productBenefit" className="flex items-center gap-2">
+                  <span>🚀</span>
+                  Product Benefit
+                </Label>
                 <Textarea
                   id="productBenefit"
-                  placeholder="What value does your product deliver?"
+                  placeholder="How does your product solve these pain points? What value does it deliver?"
                   value={productBenefit}
                   onChange={(e) => setProductBenefit(e.target.value)}
                   rows={3}
-                  className="resize-none transition-all focus:ring-2 focus:ring-primary"
+                  className="resize-none"
                 />
               </div>
 
               <div className="space-y-2">
-                <Label htmlFor="competitors">Key Competitors</Label>
-                <Textarea
+                <Label htmlFor="competitors" className="flex items-center gap-2">
+                  <span>🏆</span>
+                  Key Competitors
+                </Label>
+                <Input
                   id="competitors"
-                  placeholder="Who are your main competitors?"
+                  placeholder="e.g., Jasper, Copy.ai, ChatGPT"
                   value={competitors}
                   onChange={(e) => setCompetitors(e.target.value)}
-                  rows={3}
-                  className="resize-none transition-all focus:ring-2 focus:ring-primary"
                 />
               </div>
 
               <div className="space-y-2">
-                <Label htmlFor="differentiators">Differentiators</Label>
+                <Label htmlFor="differentiators" className="flex items-center gap-2">
+                  <span>✨</span>
+                  Differentiators
+                </Label>
                 <Textarea
                   id="differentiators"
-                  placeholder="What makes your product unique?"
+                  placeholder="What makes your product unique compared to competitors?"
                   value={differentiators}
                   onChange={(e) => setDifferentiators(e.target.value)}
                   rows={3}
-                  className="resize-none transition-all focus:ring-2 focus:ring-primary"
+                  className="resize-none"
                 />
               </div>
 
               <Button
                 onClick={handleGenerate}
                 disabled={isLoading}
-                className="w-full bg-gradient-to-r from-primary to-accent shadow-lg transition-all hover:shadow-xl disabled:opacity-50"
+                className="w-full"
                 size="lg"
               >
                 {isLoading ? (
@@ -264,7 +276,7 @@ const Index = () => {
                 onClick={handleSendToAirtable}
                 disabled={isAirtableLoading || !positioning}
                 variant="outline"
-                className="w-full shadow-lg transition-all hover:shadow-xl disabled:opacity-50"
+                className="w-full"
                 size="lg"
               >
                 {isAirtableLoading ? (
@@ -281,62 +293,82 @@ const Index = () => {
 
           {/* Output Section */}
           <div className="space-y-6">
-            <Card className="p-8 shadow-lg transition-shadow hover:shadow-xl">
-              <h3 className="mb-4 text-xl font-semibold text-primary">
-                Positioning Statement
-              </h3>
-              <div className="min-h-[120px] rounded-lg bg-muted/50 p-4">
+            <Card className="p-6 shadow-sm">
+              <div className="mb-4 flex items-center gap-3">
+                <div className="flex h-10 w-10 items-center justify-center rounded-full bg-blue-500">
+                  <span className="text-xl">🎯</span>
+                </div>
+                <h3 className="text-lg font-semibold">
+                  Positioning Statement
+                </h3>
+              </div>
+              <div className="min-h-[100px]">
                 {positioning ? (
                   <p className="leading-relaxed text-foreground">{positioning}</p>
                 ) : (
-                  <p className="text-muted-foreground italic">
-                    Your positioning statement will appear here...
+                  <p className="text-sm text-muted-foreground italic">
+                    Your AI-generated positioning statement will appear here after you fill out the form and click "Generate"
                   </p>
                 )}
               </div>
             </Card>
 
-            <Card className="p-8 shadow-lg transition-shadow hover:shadow-xl">
-              <h3 className="mb-4 text-xl font-semibold text-primary">
-                Unique Value Proposition (UVP)
-              </h3>
-              <div className="min-h-[120px] rounded-lg bg-muted/50 p-4">
+            <Card className="p-6 shadow-sm">
+              <div className="mb-4 flex items-center gap-3">
+                <div className="flex h-10 w-10 items-center justify-center rounded-full bg-orange-500">
+                  <span className="text-xl">✨</span>
+                </div>
+                <h3 className="text-lg font-semibold">
+                  Unique Value Proposition (UVP)
+                </h3>
+              </div>
+              <div className="min-h-[100px]">
                 {uvp ? (
                   <p className="leading-relaxed text-foreground">{uvp}</p>
                 ) : (
-                  <p className="text-muted-foreground italic">
-                    Your UVP will appear here...
+                  <p className="text-sm text-muted-foreground italic">
+                    Your AI-generated unique value proposition will appear here after you fill out the form and click "Generate"
                   </p>
                 )}
               </div>
             </Card>
 
-            <Card className="p-8 shadow-lg transition-shadow hover:shadow-xl">
-              <h3 className="mb-4 text-xl font-semibold text-primary">
-                Tagline
-              </h3>
-              <div className="min-h-[80px] rounded-lg bg-muted/50 p-4">
+            <Card className="p-6 shadow-sm">
+              <div className="mb-4 flex items-center gap-3">
+                <div className="flex h-10 w-10 items-center justify-center rounded-full bg-purple-500">
+                  <span className="text-xl">📄</span>
+                </div>
+                <h3 className="text-lg font-semibold">
+                  Tagline
+                </h3>
+              </div>
+              <div className="min-h-[80px]">
                 {tagline ? (
-                  <p className="text-xl font-medium leading-relaxed text-foreground">
+                  <p className="text-lg font-medium leading-relaxed text-foreground">
                     {tagline}
                   </p>
                 ) : (
-                  <p className="text-muted-foreground italic">
-                    Your tagline will appear here...
+                  <p className="text-sm text-muted-foreground italic">
+                    Your AI-generated tagline will appear here after you fill out the form and click "Generate"
                   </p>
                 )}
               </div>
             </Card>
 
-            <Card className="p-8 shadow-lg transition-shadow hover:shadow-xl">
-              <h3 className="mb-4 text-xl font-semibold text-primary">
-                Messaging insights
-              </h3>
-              <div className="min-h-[120px] rounded-lg bg-muted/50 p-4">
+            <Card className="p-6 shadow-sm">
+              <div className="mb-4 flex items-center gap-3">
+                <div className="flex h-10 w-10 items-center justify-center rounded-full bg-blue-500">
+                  <span className="text-xl">💡</span>
+                </div>
+                <h3 className="text-lg font-semibold">
+                  Messaging insights
+                </h3>
+              </div>
+              <div className="min-h-[100px]">
                 {insights ? (
                   <p className="leading-relaxed text-foreground">{insights}</p>
                 ) : (
-                  <p className="text-muted-foreground italic">
+                  <p className="text-sm text-muted-foreground italic">
                     Fill out the product information form to generate professional marketing messages tailored to your product and audience.
                   </p>
                 )}
