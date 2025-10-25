@@ -7,6 +7,7 @@ import { Card } from "@/components/ui/card";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
 import { Loader2, Sparkles, Zap, Users, AlertCircle, TrendingUp, Target } from "lucide-react";
+import { ThemeToggle } from "@/components/theme-toggle";
 
 const Index = () => {
   const { toast } = useToast();
@@ -152,17 +153,22 @@ const Index = () => {
     <div className="min-h-screen bg-background p-6">
       <div className="mx-auto max-w-7xl">
         <header className="mb-8">
-          <div className="flex items-center gap-3">
-            <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-primary">
-              <Sparkles className="h-6 w-6 text-white" />
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-3">
+              <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-primary">
+                <Sparkles className="h-6 w-6 text-white" />
+              </div>
+              <div>
+                <h1 className="text-4xl font-bold tracking-tight">
+                  ClaritiX
+                </h1>
+                <p className="mt-2 text-base text-muted-foreground">
+                  Turn vague product descriptions into clear messaging that wins markets, not just meetings.
+                </p>
+              </div>
             </div>
-            <h1 className="text-4xl font-bold tracking-tight">
-              ClaritiX
-            </h1>
+            <ThemeToggle />
           </div>
-          <p className="mt-2 text-base text-muted-foreground">
-            Turn vague product descriptions into clear messaging that wins markets, not just meetings.
-          </p>
         </header>
 
         <div className="grid gap-8 lg:grid-cols-2">
