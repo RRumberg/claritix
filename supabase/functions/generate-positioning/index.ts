@@ -44,14 +44,17 @@ serve(async (req) => {
               role: "user",
               content: `Context: We're building ${productName}, targeted at ${targetAudience}. The product helps them ${productBenefit}.
 
-Task: Write a **Positioning Statement** in the style of David Ogilvy. Make it emotionally resonant, short, punchy, and specific — like a copywriter who deeply understands the customer's pain and aspiration.
+Task: Write 3 positioning statements in the style of David Ogilvy. Make them emotionally resonant, short, punchy, and specific.
 
 Guidelines:
 - Avoid buzzwords and generic jargon.
 - Speak directly to the *emotional core* of the customer.
 - Prioritize clarity over cleverness.
 - Use brand tone that is confident, intelligent, and empathetic.
-- Output 3 tight variations, each under 20 words.
+- Each statement must be under 20 words.
+
+Output Format:
+Return ONLY 3 plain text statements separated by line breaks. No numbering, no bullet points, no bold text, no introductions, no explanations. Just the 3 statements.
 
 Constraints:
 Don't use corporate language like "synergy," "cutting-edge," or "revolutionary."
