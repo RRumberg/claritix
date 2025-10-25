@@ -320,7 +320,7 @@ const Index = () => {
                   <p className="leading-relaxed text-foreground">{positioning}</p>
                 ) : (
                   <p className="text-sm text-muted-foreground italic">
-                    Your AI-generated positioning statement will appear here after you fill out the form and click "Generate"
+                    Where your product stands - and why it matters
                   </p>
                 )}
               </div>
