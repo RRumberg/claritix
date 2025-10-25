@@ -27,8 +27,8 @@ serve(async (req) => {
 
     console.log("Generating positioning outputs for:", productName);
 
-    // Generate all four outputs in parallel
-    const [positioningResponse, uvpResponse, taglineResponse, insightsResponse] = await Promise.all([
+    // Generate positioning, UVP, and tagline in parallel (first batch)
+    const [positioningResponse, uvpResponse, taglineResponse] = await Promise.all([
       // Positioning Statement
       fetch("https://ai.gateway.lovable.dev/v1/chat/completions", {
         method: "POST",
@@ -136,48 +136,10 @@ Requirements:
           ]
         }),
       }),
-
-      // Strategic Insights
-      fetch("https://ai.gateway.lovable.dev/v1/chat/completions", {
-        method: "POST",
-        headers: {
-          Authorization: `Bearer ${LOVABLE_API_KEY}`,
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          model: "google/gemini-2.5-flash",
-          messages: [
-            {
-              role: "system",
-              content: "You're a brand strategist trained in positioning frameworks (April Dunford) and copywriting (David Ogilvy, Eugene Schwartz). Provide strategic insights in a clear, thoughtful voice - think senior strategist giving clear feedback in a pitch workshop. No AI voice. Keep it under 100 words."
-            },
-            {
-              role: "user",
-              content: `Based on the following company input, provide a brief insight summary explaining:
-
-1. What this company appears to be offering.
-2. What emotional or strategic angle seems strongest (and why).
-3. How the Positioning Statement, UVP, and Tagline might be refined based on this.
-4. One key message or phrase they could elevate.
-5. Optional: one thing they may be missing or underselling.
-
-Company Information:
-- Product Name: ${productName}
-- Target Audience: ${targetAudience}
-- Top 3 Pain Points: ${painPoints}
-- Product Benefit: ${productBenefit}
-- Key Competitors: ${competitors}
-- Differentiators: ${differentiators}
-
-Provide strategic insights in under 100 words.`
-            }
-          ]
-        }),
-      }),
     ]);
 
     // Check for rate limiting or payment errors
-    if (positioningResponse.status === 429 || uvpResponse.status === 429 || taglineResponse.status === 429 || insightsResponse.status === 429) {
+    if (positioningResponse.status === 429 || uvpResponse.status === 429 || taglineResponse.status === 429) {
       console.error("Rate limit exceeded");
       return new Response(
         JSON.stringify({ error: "Rate limit exceeded. Please try again in a moment." }), 
@@ -188,7 +150,7 @@ Provide strategic insights in under 100 words.`
       );
     }
 
-    if (positioningResponse.status === 402 || uvpResponse.status === 402 || taglineResponse.status === 402 || insightsResponse.status === 402) {
+    if (positioningResponse.status === 402 || uvpResponse.status === 402 || taglineResponse.status === 402) {
       console.error("Payment required");
       return new Response(
         JSON.stringify({ error: "AI credits depleted. Please add funds to continue." }), 
@@ -199,21 +161,19 @@ Provide strategic insights in under 100 words.`
       );
     }
 
-    if (!positioningResponse.ok || !uvpResponse.ok || !taglineResponse.ok || !insightsResponse.ok) {
+    if (!positioningResponse.ok || !uvpResponse.ok || !taglineResponse.ok) {
       console.error("AI gateway error:", {
         positioning: positioningResponse.status,
         uvp: uvpResponse.status,
-        tagline: taglineResponse.status,
-        insights: insightsResponse.status
+        tagline: taglineResponse.status
       });
       throw new Error("AI gateway error");
     }
 
-    const [positioningData, uvpData, taglineData, insightsData] = await Promise.all([
+    const [positioningData, uvpData, taglineData] = await Promise.all([
       positioningResponse.json(),
       uvpResponse.json(),
       taglineResponse.json(),
-      insightsResponse.json(),
     ]);
 
     let positioning = positioningData.choices?.[0]?.message?.content || "";
@@ -260,19 +220,53 @@ Inputs:
 
     let uvp = uvpData.choices?.[0]?.message?.content || "";
     let tagline = taglineData.choices?.[0]?.message?.content || "";
-    let insights = insightsData.choices?.[0]?.message?.content || "";
     
-    // Remove all ** markdown formatting from all outputs
+    // Remove all ** markdown formatting from outputs
     positioning = positioning.replace(/\*\*/g, "");
     uvp = uvp.replace(/\*\*/g, "");
     tagline = tagline.replace(/\*\*/g, "");
-    insights = insights.replace(/\*\*/g, "");
     
     console.log("tagline_raw:", tagline);
     
     // Simple cleanup: remove extra whitespace and newlines
     tagline = tagline.replace(/\n+/g, " ").replace(/\s+/g, " ").trim();
     console.log("tagline_formatted:", tagline);
+
+    // Now generate insights using the completed outputs
+    const businessSummary = `Product: ${productName}. Target Audience: ${targetAudience}. Pain Points: ${painPoints}. Benefit: ${productBenefit}. Competitors: ${competitors}. Differentiators: ${differentiators}`;
+    
+    const insightsResponse = await fetch("https://ai.gateway.lovable.dev/v1/chat/completions", {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${LOVABLE_API_KEY}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        model: "google/gemini-2.5-flash",
+        messages: [
+          {
+            role: "user",
+            content: `You're a senior brand strategist trained in positioning (April Dunford) and emotionally resonant copywriting (David Ogilvy). Based on the company summary and messaging outputs below, give a strategic messaging insight in under 100 words. Include: - What message angle is strongest - One suggestion to refine the Positioning, UVP, or Tagline - One overlooked message or opportunity to elevate Use confident, practical language. Do not use any formatting like bold, italic, Markdown, asterisks, or quotation marks. Return plain text only.
+
+Company Summary: ${businessSummary}
+
+Messaging Outputs:
+Positioning Statement: ${positioning}
+Unique Value Proposition: ${uvp}
+Tagline: ${tagline}`
+          }
+        ]
+      }),
+    });
+
+    if (!insightsResponse.ok) {
+      console.error("AI gateway error for insights:", insightsResponse.status);
+      throw new Error("Failed to generate insights");
+    }
+
+    const insightsData = await insightsResponse.json();
+    let insights = insightsData.choices?.[0]?.message?.content || "";
+    insights = insights.replace(/\*\*/g, "");
 
     console.log("Successfully generated all positioning outputs");
 
