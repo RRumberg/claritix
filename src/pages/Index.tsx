@@ -6,7 +6,7 @@ import { Label } from "@/components/ui/label";
 import { Card } from "@/components/ui/card";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
-import { Loader2, Sparkles } from "lucide-react";
+import { Loader2, Sparkles, Zap, Users, AlertCircle, TrendingUp, Target } from "lucide-react";
 
 const Index = () => {
   const { toast } = useToast();
@@ -170,14 +170,14 @@ const Index = () => {
           <Card className="p-6 shadow-sm">
             <h2 className="mb-6 flex items-center gap-2 text-xl font-semibold">
               Product Information
-              <span>✨</span>
+              <Sparkles className="h-5 w-5 text-primary" />
             </h2>
             
             <div className="space-y-4">
               <div className="space-y-2">
                 <Label htmlFor="productName" className="flex items-center gap-2">
                   Product Name
-                  <span>⚡</span>
+                  <Zap className="h-4 w-4 text-orange-500" />
                 </Label>
                 <Input
                   id="productName"
@@ -190,7 +190,7 @@ const Index = () => {
               <div className="space-y-2">
                 <Label htmlFor="targetAudience" className="flex items-center gap-2">
                   Target Audience
-                  <span>😊</span>
+                  <Users className="h-4 w-4 text-orange-500" />
                 </Label>
                 <Input
                   id="targetAudience"
@@ -203,7 +203,7 @@ const Index = () => {
               <div className="space-y-2">
                 <Label htmlFor="painPoints" className="flex items-center gap-2">
                   Top 3 Pain Points
-                  <span>⚠️</span>
+                  <AlertCircle className="h-4 w-4 text-orange-500" />
                 </Label>
                 <Textarea
                   id="painPoints"
@@ -218,7 +218,7 @@ const Index = () => {
               <div className="space-y-2">
                 <Label htmlFor="productBenefit" className="flex items-center gap-2">
                   Product Benefit
-                  <span>📈</span>
+                  <TrendingUp className="h-4 w-4 text-orange-500" />
                 </Label>
                 <Textarea
                   id="productBenefit"
@@ -233,7 +233,7 @@ const Index = () => {
               <div className="space-y-2">
                 <Label htmlFor="competitors" className="flex items-center gap-2">
                   Key Competitors
-                  <span>🏆</span>
+                  <Target className="h-4 w-4 text-orange-500" />
                 </Label>
                 <Input
                   id="competitors"
@@ -246,7 +246,7 @@ const Index = () => {
               <div className="space-y-2">
                 <Label htmlFor="differentiators" className="flex items-center gap-2">
                   Differentiators
-                  <span>✨</span>
+                  <Sparkles className="h-4 w-4 text-orange-500" />
                 </Label>
                 <Textarea
                   id="differentiators"
