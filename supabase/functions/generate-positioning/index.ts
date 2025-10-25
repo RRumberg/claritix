@@ -45,18 +45,19 @@ serve(async (req) => {
             },
             {
               role: "user",
-              content: `Create a positioning statement for this product:
+              content: `Create a positioning statement using this exact format:
 
-Product: ${productName}
-Target Audience: ${targetAudience}
-Pain Points: ${painPoints}
-Product Benefit: ${productBenefit}
-Competitors: ${competitors}
-Differentiators: ${differentiators}
+For [target customer] who [need/opportunity], the [product name] is a [category] that [key benefit]. Unlike [primary competitor], our product [primary differentiator].
 
-Format: "For [target audience] who [statement of need/opportunity], [product name] is a [product category] that [statement of key benefit]. Unlike [primary competitive alternative], [product name] [statement of primary differentiation]."
+Inputs:
+- Product Name: ${productName}
+- Target Audience: ${targetAudience}
+- Pain Points: ${painPoints}
+- Product Benefit: ${productBenefit}
+- Competitors: ${competitors}
+- Differentiators: ${differentiators}
 
-Provide a concise, strategic positioning statement (2-3 sentences max).`
+Generate a concise positioning statement following the format above.`
             }
           ]
         }),
