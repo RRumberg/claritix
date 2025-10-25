@@ -152,10 +152,15 @@ const Index = () => {
     <div className="min-h-screen bg-background p-6">
       <div className="mx-auto max-w-7xl">
         <header className="mb-8">
-          <h1 className="mb-2 text-4xl font-bold tracking-tight">
-            ClaritiX
-          </h1>
-          <p className="text-base text-muted-foreground">
+          <div className="flex items-center gap-3">
+            <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-primary">
+              <Sparkles className="h-6 w-6 text-white" />
+            </div>
+            <h1 className="text-4xl font-bold tracking-tight">
+              ClaritiX
+            </h1>
+          </div>
+          <p className="mt-2 text-base text-muted-foreground">
             Turn vague product descriptions into clear messaging that wins markets, not just meetings.
           </p>
         </header>
