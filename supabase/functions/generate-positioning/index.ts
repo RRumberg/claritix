@@ -83,17 +83,16 @@ Inputs:
               role: "user",
               content: `Context: The product is ${productName} for ${targetAudience}, and solves ${painPoints} in a way that ${differentiators}.
 
-Task: Craft 3 Unique Value Propositions that capture the *emotional and functional value* in one clear, bold sentence — the kind that could go on a homepage hero banner.
+Task: Write 3 unique value propositions. Each must be under 15 words. Make them punchy, real, and irresistible.
 
 Guidelines:
-- Follow copywriting principles: benefit first, logic second.
-- Channel classic Ogilvy copy: punchy, real, irresistible.
-- Make it sound like a promise that feels true and urgent.
-- Avoid abstract claims — be visceral and specific.
-- Each version under 15 words.
+- Benefit first, logic second
+- Be visceral and specific
+- Sound like a promise that feels true and urgent
+- Avoid abstract claims
 
 Output Format:
-Return ONLY 3 plain text propositions separated by line breaks. No numbering, no labels, no explanations, no emotional hook descriptions. Just the 3 value propositions.
+Return ONLY 3 plain text lines. No numbers. No bullet points. No labels like "Emotional hook:" or "(Focus:". No parentheses. No asterisks. No bold. No formatting whatsoever. Just 3 simple sentences, one per line.
 
 Inputs:
 - Product Name: ${productName}
