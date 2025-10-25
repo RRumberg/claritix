@@ -124,7 +124,8 @@ Inputs:
 
 Rules:
 - Reflect the ICP's top pain and our key differentiator.
-- Avoid clichés ("transform", "reimagine", "next-gen"), rhymes, or wordplay.
+- BANNED WORDS: innovative, seamless, cutting-edge, next-gen, reimagine, transform, world-class, best-in-class, empower, robust, at scale, leverage, optimize (unless tied to a metric).
+- Avoid clichés, rhymes, or wordplay.
 
 Inputs:
 - Product Name: ${productName}
