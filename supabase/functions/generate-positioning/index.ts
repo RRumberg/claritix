@@ -231,7 +231,42 @@ Inputs:
     }
 
     const uvp = uvpData.choices?.[0]?.message?.content || "";
-    const tagline = taglineData.choices?.[0]?.message?.content || "";
+    let tagline = taglineData.choices?.[0]?.message?.content || "";
+    
+    // Sanitize tagline to ensure proper formatting
+    const taglineSanitizeResponse = await fetch("https://ai.gateway.lovable.dev/v1/chat/completions", {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${LOVABLE_API_KEY}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        model: "google/gemini-2.5-flash",
+        temperature: 0.2,
+        messages: [
+          {
+            role: "system",
+            content: "You format taglines into a single line."
+          },
+          {
+            role: "user",
+            content: `Take the Tagline output, extract the strongest three SHORT lines, remove any punctuation and extra words so each is 3–5 words, then return ONE SINGLE LINE joined with " / ".
+
+Rules: no brand names, no buzzwords, no punctuation, no newlines, no extra text.
+
+Input: ${tagline}`
+          }
+        ]
+      }),
+    });
+
+    if (taglineSanitizeResponse.ok) {
+      const taglineSanitizeData = await taglineSanitizeResponse.json();
+      const sanitizedTagline = taglineSanitizeData.choices?.[0]?.message?.content;
+      if (sanitizedTagline) {
+        tagline = sanitizedTagline;
+      }
+    }
 
     console.log("Successfully generated all positioning outputs");
 
