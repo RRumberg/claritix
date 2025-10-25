@@ -125,17 +125,22 @@ Inputs:
             },
             {
               role: "user",
-              content: `You are a senior product marketer. Return 3 distinct taglines as PLAIN TEXT, one per line, no bullets, no numbers, no quotes, no punctuation at the end. Each ≤8 words.
+              content: `You are David Ogilvy writing taglines.
+
+Goal: 10 ultra-short options that land emotionally on the ICP while pointing to the product's core value.
 
 Rules:
-- Reflect the ICP's top pain and our key differentiator.
-- BANNED WORDS: innovative, seamless, cutting-edge, next-gen, reimagine, transform, world-class, best-in-class, empower, robust, at scale, leverage, optimize (unless tied to a metric).
-- Avoid clichés, rhymes, or wordplay.
+- Plain language, human, concrete.
+- 3–6 words each. No buzzwords (platform, solution, AI-powered, innovative), no clichés, no rhymes, no exclamation marks, no brand or product names.
+- No bullets, no numbering, no quotes, one tagline per line.
+- Focus on one feeling (relief, control, confidence, profit) and one value (what changes for them).
+- Avoid verbs like "transform/reimagine/empower"; prefer simple, active words.
 
 Inputs:
-- Product Name: ${productName}
-- Target Audience: ${targetAudience}
-- Top Pain: ${painPoints}
+- Product: ${productName}
+- Audience: ${targetAudience}
+- Top pain: ${painPoints}
+- Core value: ${productBenefit}
 - Differentiator: ${differentiators}`
             }
           ]
