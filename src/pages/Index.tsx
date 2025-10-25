@@ -325,6 +325,17 @@ const Index = () => {
                 )}
               </div>
             </Card>
+
+            <Card className="p-8 shadow-lg transition-shadow hover:shadow-xl">
+              <h3 className="mb-4 text-xl font-semibold text-primary">
+                AI-powered insights
+              </h3>
+              <div className="min-h-[80px] rounded-lg bg-muted/50 p-4">
+                <p className="leading-relaxed text-foreground">
+                  Fill out the product information form to generate professional marketing messages tailored to your product and audience.
+                </p>
+              </div>
+            </Card>
           </div>
         </div>
       </div>
