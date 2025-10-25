@@ -342,7 +342,7 @@ const Index = () => {
                   <p className="leading-relaxed text-foreground">{uvp}</p>
                 ) : (
                   <p className="text-sm text-muted-foreground italic">
-                    Your AI-generated unique value proposition will appear here after you fill out the form and click "Generate"
+                    What your audience really gets, not just what you build
                   </p>
                 )}
               </div>
