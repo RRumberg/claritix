@@ -107,7 +107,7 @@ Inputs:
             },
             {
               role: "user",
-              content: `Return 3 options as a bulleted list. Each <=8 words. Confident, professional. No rhymes or clichés.
+              content: `Return 3 taglines as plain text. Each on its own line. No bullets, no asterisks, no dashes, no numbering, no markdown, no quotes. Each ≤8 words. Tone: confident, professional.
 
 Inputs:
 - Product Name: ${productName}
