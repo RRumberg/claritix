@@ -388,7 +388,7 @@ const Index = () => {
                   <p className="leading-relaxed text-foreground">{insights}</p>
                 ) : (
                   <p className="text-sm text-muted-foreground italic">
-                    Fill out the product information form to generate professional marketing messages tailored to your product and audience.
+                    The why behind your words. Know what's working - and what to push harder.
                   </p>
                 )}
               </div>
