@@ -158,7 +158,7 @@ const Index = () => {
             Claritix
           </h1>
           <p className="text-lg text-muted-foreground">
-            Turn vague product descriptions into messaging that wins markets, not just meetings.
+            Turn vague product descriptions into clear messaging that wins markets, not just meetings.
           </p>
         </header>
 
