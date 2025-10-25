@@ -118,10 +118,6 @@ Inputs:
           model: "google/gemini-2.5-flash",
           messages: [
             {
-              role: "system",
-              content: "You are a creative copywriter specializing in memorable brand taglines. Create short, punchy, memorable taglines."
-            },
-            {
               role: "user",
               content: `You are David Ogilvy writing taglines.
 
