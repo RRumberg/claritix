@@ -83,16 +83,17 @@ Inputs:
               role: "user",
               content: `Context: The product is ${productName} for ${targetAudience}, and solves ${painPoints} in a way that ${differentiators}.
 
-Task: Write 3 unique value propositions. Each must be under 15 words. Make them punchy, real, and irresistible.
+Task: Write 3 unique value propositions in the style of David Ogilvy and April Dunford.
 
-Guidelines:
-- Benefit first, logic second
-- Be visceral and specific
-- Sound like a promise that feels true and urgent
-- Avoid abstract claims
+Requirements:
+- Each must be a single, complete sentence under 25 words
+- Emotionally compelling copy that speaks to customer pain and aspiration
+- Strategically differentiated positioning that highlights what makes this unique
+- Clear benefit statement that resonates immediately
+- Avoid abstract claims - be visceral and specific
 
 Output Format:
-Return ONLY 3 plain text lines. No numbers. No bullet points. No labels like "Emotional hook:" or "(Focus:". No parentheses. No asterisks. No bold. No formatting whatsoever. Just 3 simple sentences, one per line.
+Return ONLY 3 plain text sentences separated by line breaks. No numbers. No bullet points. No labels. No formatting. Just 3 complete sentences.
 
 Inputs:
 - Product Name: ${productName}
