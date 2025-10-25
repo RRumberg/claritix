@@ -1,0 +1,4 @@
+project_id = "tdfhczwejsscisqsgnau"
+
+[functions.generate-positioning]
+verify_jwt = false
