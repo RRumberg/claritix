@@ -114,26 +114,21 @@ Inputs:
           messages: [
             {
               role: "user",
-              content: `You are David Ogilvy writing taglines.
+              content: `Context: The brand stands for ${differentiators}. Our audience feels ${painPoints}, and our product helps them ${productBenefit}.
 
-Write exactly THREE taglines, one per line (no bullets, no numbering, no quotes, no punctuation at the end). Each line must be 3–5 words, plain language, memorable, and grounded in a concrete image.
+Task: Write a **Tagline** in the tone of classic advertising legends. It should be short (3–6 words), emotionally sticky, and worthy of living on a billboard.
 
-Voice & taste:
-- Sound like a human with taste, not a slogan generator.
-- Aim at one emotion (relief, control, confidence, pride) and one concrete outcome.
-- Use concrete nouns or images (e.g., map, boots, gate, ledger, signal, season, acre, row, dust, rain, dashboard).
-- Prefer strong verb + concrete noun ("verb the noun") or "noun + noun".
+Guidelines:
+- Capture the soul of the product in the fewest words possible.
+- Make it sound timeless — like it's always been true.
+- Avoid trendy or techy language. Go for feeling and clarity.
+- Echo the tone of Nike's "Just Do It" or Apple's "Think Different."
 
-Do NOT:
-- Do not include product or brand names.
-- Do not use buzzwords (platform, solution, AI-powered, innovative, optimize, transform).
-- Do not use the words: grow, value, goals, achieve, future, simply, better, data, clarity, smarter, trust.
-- Do not repeat the same main verb or the same main noun across the three lines.
-
-Format: Return plain text only, exactly three lines, each a separate tagline, no extra text.
+Constraints:
+Maximum 6 words. Output 5 options, separated with ;
 
 Inputs:
-- Audience: ${targetAudience}
+- Target Audience: ${targetAudience}
 - Top pain: ${painPoints}
 - Core value: ${productBenefit}
 - Differentiator: ${differentiators}`
@@ -226,128 +221,10 @@ Inputs:
     const uvp = uvpData.choices?.[0]?.message?.content || "";
     let tagline = taglineData.choices?.[0]?.message?.content || "";
     
-    console.log("tagline_raw_length:", tagline.length);
+    console.log("tagline_raw:", tagline);
     
-    // Deterministic tagline formatter
-    function formatTaglines(raw: string, competitors: string): string {
-      const brandTokens = new Set(
-        competitors
-          .toLowerCase()
-          .replace(/[^a-z0-9\s]/g, " ")
-          .split(/\s+/)
-          .filter(Boolean)
-      );
-      const buzzwords = new Set(["innovative","seamless","nextgen","next-gen","revolutionary","cuttingedge","cutting-edge","transform","empower","synergy","leverage","reimagine","reimagination"]);
-      const emotionWords = new Set(["relief","control","confident","confidence","profit","clarity","simple","easy","easily","smarter","faster","calm","clean","clear"]);
-
-      // Split into candidates by common separators and punctuation
-      const parts = raw
-        .replace(/\n+/g, " ")
-        .split(/[•·\u2022|/;]|[.?!]+|—|–|,|\|/g)
-        .map(s => s.replace(/["'""''(){}\[\]-]/g, " "))
-        .flatMap(s => s.split(/[\n\r]+/))
-        .map(s => s.replace(/\s+/g, " ").trim())
-        .filter(Boolean);
-
-      function cleanCandidate(s: string): string {
-        let t = s.replace(/[.,!?;:/"'""''(){}\[\]-]/g, " ");
-        t = t.replace(/\s+/g, " ").trim();
-        return t;
-      }
-
-      function hasBuzz(s: string): boolean {
-        const t = s.toLowerCase().replace(/[^a-z0-9\s]/g,"");
-        return t.split(/\s+/).some(w => buzzwords.has(w));
-      }
-
-      function stripBrands(s: string): string {
-        const words = s.split(/\s+/);
-        const kept = words.filter(w => !brandTokens.has(w.toLowerCase()));
-        return kept.join(" ").trim();
-      }
-
-      function to3to5Words(s: string): string | null {
-        const words = s.split(/\s+/).filter(Boolean);
-        if (words.length < 3) return null;
-        const trimmed = words.slice(0, 5);
-        if (trimmed.length < 3) return null;
-        return trimmed.join(" ");
-      }
-
-      const candidates: string[] = [];
-      for (let p of parts) {
-        let c = cleanCandidate(p);
-        if (!c) continue;
-        if (hasBuzz(c)) continue;
-        c = stripBrands(c);
-        if (!c) continue;
-        c = cleanCandidate(c);
-        const limited = to3to5Words(c);
-        if (!limited) continue;
-        candidates.push(limited);
-      }
-
-      // De-duplicate candidates
-      const uniq = Array.from(new Set(candidates.map(c => c.toLowerCase()))).map(u => candidates.find(c => c.toLowerCase() === u)!);
-
-      // Scoring: prefer 4 words, then emotional words
-      function score(c: string): number {
-        const ws = c.toLowerCase().split(/\s+/);
-        const lenScore = -Math.abs(ws.length - 4);
-        const emo = ws.reduce((acc,w) => acc + (emotionWords.has(w) ? 1 : 0), 0);
-        return lenScore * 10 + emo;
-      }
-
-      const sorted = uniq.sort((a,b) => score(b) - score(a));
-
-      // Select with no repeated words across taglines
-      const used = new Set<string>();
-      const chosen: string[] = [];
-      for (const cand of sorted) {
-        const tokens = cand.toLowerCase().split(/\s+/);
-        const overlaps = tokens.some((t: string) => used.has(t));
-        if (!overlaps) {
-          chosen.push(cand);
-          tokens.forEach((t: string) => used.add(t));
-        }
-        if (chosen.length === 3) break;
-      }
-
-      // Relaxation if needed
-      if (chosen.length < 3) {
-        for (const cand of sorted) {
-          if (chosen.includes(cand)) continue;
-          chosen.push(cand);
-          if (chosen.length === 3) break;
-        }
-      }
-
-      // Final fallback if still <3
-      while (chosen.length < 3) {
-        const fallback = sorted[chosen.length] || "grow your value";
-        if (!chosen.includes(fallback)) {
-          chosen.push(fallback);
-        } else {
-          chosen.push("achieve your goals");
-        }
-      }
-
-      // Final clean: ensure no punctuation and 3–5 words
-      const final = chosen.map(c => {
-        let t = c.replace(/[^\w\s]/g, " ").replace(/\s+/g, " ").trim();
-        const words = t.split(/\s+/).slice(0,5);
-        if (words.length < 3) {
-          while (words.length < 3) words.push(words[words.length - 1] || "value");
-        }
-        return words.join(" ");
-      });
-
-      const joined = final.slice(0,3).join(" / ");
-      return joined.replace(/\n+/g, " ").trim();
-    }
-    
-    // Apply deterministic formatter
-    tagline = formatTaglines(tagline, competitors);
+    // Simple cleanup: remove extra whitespace and newlines
+    tagline = tagline.replace(/\n+/g, " ").replace(/\s+/g, " ").trim();
     console.log("tagline_formatted:", tagline);
 
     console.log("Successfully generated all positioning outputs");
