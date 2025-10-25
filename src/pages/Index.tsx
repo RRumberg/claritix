@@ -155,7 +155,7 @@ const Index = () => {
             <span className="text-sm font-medium text-primary">AI-Powered</span>
           </div>
           <h1 className="mb-2 text-5xl font-bold tracking-tight">
-            Positioning Engine
+            Positioned
           </h1>
           <p className="text-lg text-muted-foreground">
             Turn vague product descriptions into messaging that wins markets, not just meetings.
