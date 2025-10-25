@@ -54,9 +54,10 @@ Requirements:
 - Make it emotionally resonant and specific
 - Speak to the customer's pain and aspiration
 - Avoid buzzwords and corporate jargon
+- CRITICAL: Do not use any formatting whatsoever - no asterisks, no bold, no italic, no markdown, no special characters for emphasis
 
 Output Format:
-Return ONLY the positioning statement. No title, no formatting, no explanation. Just the single sentence.
+Return ONLY the positioning statement as plain text. No title, no formatting, no explanation. Just the single sentence.
 
 Inputs:
 - Target Audience: ${targetAudience}
@@ -91,9 +92,10 @@ Requirements:
 - Strategically differentiated positioning that highlights what makes this unique
 - Clear benefit statement that resonates immediately
 - Avoid abstract claims - be visceral and specific
+- CRITICAL: Do not use any formatting whatsoever - no asterisks, no bold, no italic, no markdown, no special characters
 
 Output Format:
-Return ONLY 3 plain text sentences separated by line breaks. No numbers. No bullet points. No labels. No formatting. Just 3 complete sentences.
+Return ONLY 3 plain text sentences separated by line breaks. No numbers. No bullet points. No labels. No formatting. No asterisks. Just 3 complete sentences.
 
 Inputs:
 - Product Name: ${productName}
@@ -221,10 +223,10 @@ Inputs:
     let uvp = uvpData.choices?.[0]?.message?.content || "";
     let tagline = taglineData.choices?.[0]?.message?.content || "";
     
-    // Remove all ** markdown formatting from outputs
-    positioning = positioning.replace(/\*\*/g, "");
-    uvp = uvp.replace(/\*\*/g, "");
-    tagline = tagline.replace(/\*\*/g, "");
+    // Remove all markdown formatting characters from outputs
+    positioning = positioning.replace(/[\*_~`#]/g, "");
+    uvp = uvp.replace(/[\*_~`#]/g, "");
+    tagline = tagline.replace(/[\*_~`#]/g, "");
     
     console.log("tagline_raw:", tagline);
     
@@ -246,7 +248,7 @@ Inputs:
         messages: [
           {
             role: "user",
-            content: `You're a senior brand strategist trained in positioning (April Dunford) and emotionally resonant copywriting (David Ogilvy). Based on the company summary and messaging outputs below, give a strategic messaging insight in under 100 words. Include: - What message angle is strongest - One suggestion to refine the Positioning, UVP, or Tagline - One overlooked message or opportunity to elevate Use confident, practical language. Do not use any formatting like bold, italic, Markdown, asterisks, or quotation marks. Return plain text only.
+            content: `You're a senior brand strategist trained in positioning (April Dunford) and emotionally resonant copywriting (David Ogilvy). Based on the company summary and messaging outputs below, give a strategic messaging insight in under 100 words. Include: - What message angle is strongest - One suggestion to refine the Positioning, UVP, or Tagline - One overlooked message or opportunity to elevate. Use confident, practical language. CRITICAL: Do not use any formatting whatsoever - no bold, no italic, no Markdown, no asterisks, no underscores, no quotation marks for emphasis. Return plain text only with natural sentence structure.
 
 Company Summary: ${businessSummary}
 
@@ -266,7 +268,7 @@ Tagline: ${tagline}`
 
     const insightsData = await insightsResponse.json();
     let insights = insightsData.choices?.[0]?.message?.content || "";
-    insights = insights.replace(/\*\*/g, "");
+    insights = insights.replace(/[\*_~`#]/g, "");
 
     console.log("Successfully generated all positioning outputs");
 
