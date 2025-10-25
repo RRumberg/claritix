@@ -79,21 +79,17 @@ Generate a concise positioning statement following the format above.`
             },
             {
               role: "user",
-              content: `Create a Unique Value Proposition (UVP) for this product:
+              content: `Write a concise Unique Value Proposition (max 25 words) using the context below.
 
-Product: ${productName}
-Target Audience: ${targetAudience}
-Pain Points: ${painPoints}
-Product Benefit: ${productBenefit}
-Competitors: ${competitors}
-Differentiators: ${differentiators}
+Inputs:
+- Product Name: ${productName}
+- Target Audience: ${targetAudience}
+- Pain Points: ${painPoints}
+- Product Benefit: ${productBenefit}
+- Competitors: ${competitors}
+- Differentiators: ${differentiators}
 
-The UVP should clearly state:
-1. What the product does
-2. Who it's for
-3. What makes it unique/better
-
-Provide a clear, benefit-focused UVP (1-2 sentences).`
+Generate a clear, benefit-focused UVP in 25 words or less.`
             }
           ]
         }),
