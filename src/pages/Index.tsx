@@ -298,16 +298,18 @@ const Index = () => {
 
           {/* Output Section */}
           <div className="space-y-6">
-            <Card className="p-6 shadow-sm">
-              <div className="mb-4 flex items-center gap-3">
-                <div className="flex h-10 w-10 items-center justify-center rounded-full bg-blue-500">
-                  <span className="text-xl">🎯</span>
+            <Card className="overflow-hidden shadow-sm">
+              <div className="bg-primary/5 px-6 py-4">
+                <div className="flex items-center gap-3">
+                  <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-blue-500">
+                    <span className="text-xl">🎯</span>
+                  </div>
+                  <h3 className="text-lg font-semibold">
+                    Positioning Statement
+                  </h3>
                 </div>
-                <h3 className="text-lg font-semibold">
-                  Positioning Statement
-                </h3>
               </div>
-              <div className="min-h-[100px]">
+              <div className="min-h-[120px] p-6">
                 {positioning ? (
                   <p className="leading-relaxed text-foreground">{positioning}</p>
                 ) : (
@@ -318,16 +320,18 @@ const Index = () => {
               </div>
             </Card>
 
-            <Card className="p-6 shadow-sm">
-              <div className="mb-4 flex items-center gap-3">
-                <div className="flex h-10 w-10 items-center justify-center rounded-full bg-orange-500">
-                  <span className="text-xl">✨</span>
+            <Card className="overflow-hidden shadow-sm">
+              <div className="bg-orange-500/10 px-6 py-4">
+                <div className="flex items-center gap-3">
+                  <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-orange-500">
+                    <span className="text-xl">✨</span>
+                  </div>
+                  <h3 className="text-lg font-semibold">
+                    Unique Value Proposition (UVP)
+                  </h3>
                 </div>
-                <h3 className="text-lg font-semibold">
-                  Unique Value Proposition (UVP)
-                </h3>
               </div>
-              <div className="min-h-[100px]">
+              <div className="min-h-[120px] p-6">
                 {uvp ? (
                   <p className="leading-relaxed text-foreground">{uvp}</p>
                 ) : (
@@ -338,16 +342,18 @@ const Index = () => {
               </div>
             </Card>
 
-            <Card className="p-6 shadow-sm">
-              <div className="mb-4 flex items-center gap-3">
-                <div className="flex h-10 w-10 items-center justify-center rounded-full bg-purple-500">
-                  <span className="text-xl">📄</span>
+            <Card className="overflow-hidden shadow-sm">
+              <div className="bg-purple-500/10 px-6 py-4">
+                <div className="flex items-center gap-3">
+                  <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-purple-500">
+                    <span className="text-xl">📄</span>
+                  </div>
+                  <h3 className="text-lg font-semibold">
+                    Tagline
+                  </h3>
                 </div>
-                <h3 className="text-lg font-semibold">
-                  Tagline
-                </h3>
               </div>
-              <div className="min-h-[80px]">
+              <div className="min-h-[100px] p-6">
                 {tagline ? (
                   <p className="text-lg font-medium leading-relaxed text-foreground">
                     {tagline}
@@ -360,16 +366,18 @@ const Index = () => {
               </div>
             </Card>
 
-            <Card className="p-6 shadow-sm">
-              <div className="mb-4 flex items-center gap-3">
-                <div className="flex h-10 w-10 items-center justify-center rounded-full bg-blue-500">
-                  <span className="text-xl">💡</span>
+            <Card className="overflow-hidden shadow-sm">
+              <div className="bg-primary/5 px-6 py-4">
+                <div className="flex items-center gap-3">
+                  <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-blue-500">
+                    <span className="text-xl">💡</span>
+                  </div>
+                  <h3 className="text-lg font-semibold">
+                    Messaging insights
+                  </h3>
                 </div>
-                <h3 className="text-lg font-semibold">
-                  Messaging insights
-                </h3>
               </div>
-              <div className="min-h-[100px]">
+              <div className="min-h-[120px] p-6">
                 {insights ? (
                   <p className="leading-relaxed text-foreground">{insights}</p>
                 ) : (
