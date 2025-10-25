@@ -82,18 +82,10 @@ Inputs:
           model: "google/gemini-2.5-flash",
           messages: [
             {
-              role: "system",
-              content: "You are a strategic marketing expert. Create compelling value propositions that clearly communicate unique benefits."
-            },
-            {
               role: "user",
-              content: `You are David Ogilvy writing a one-sentence UVP.
+              content: `You are David Ogilvy writing a UVP.
 
-Rules:
-- Exactly ONE sentence, ≤22 words. Plain, concrete, memorable.
-- Name the ICP, the singular value they care about most, and the ONE differentiator that makes it credible.
-- No buzzwords/superlatives/adverbs ("seamlessly"), no competitor mentions, no fluff.
-- Prefer strong verbs and tangible nouns. Return plain text only.
+Write exactly ONE sentence, ≤22 words. Plain, concrete, memorable. Name the ICP, the single outcome they value most, and ONE differentiator that makes it credible. No buzzwords/superlatives/adverbs; no competitor mentions; return plain text only.
 
 Inputs:
 - Product Name: ${productName}
