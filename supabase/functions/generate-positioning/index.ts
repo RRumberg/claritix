@@ -111,22 +111,33 @@ Inputs:
           messages: [
             {
               role: "user",
-              content: `You are David Ogilvy writing taglines.
+              content: `You are David Ogilvy writing taglines. Return 12 candidate lines.
 
-Return 10 ultra-short options that land emotionally on the ICP while pointing to the product's core value.
+Hard rules:
+- 3–5 words each. Plain, human, memorable.
+- No punctuation, no quotes, no bullets, one line per tagline.
+- No brand names. No abstract nouns alone (profit, clarity, data, growth).
+- Each line must include ONE concrete noun or image (e.g., map, ledger, gate, signal, season, field).
+- Prefer strong verb + concrete noun ("verb the noun" or "noun + noun").
+- Do not repeat the same main verb or the same main noun across lines.
 
-Rules:
-- 3–6 words each. Plain, human, memorable.
-- No buzzwords, no clichés, no rhymes, no exclamation marks, no brand names.
-- One tagline per line. No bullets, no numbers, no quotes.
-- Focus each line on ONE feeling (relief, control, confidence, profit) and ONE value (what changes for them).
+Guide:
+- Aim at one emotion (relief, control, confidence, pride) and one value (time back, fewer errors, faster decisions).
+- Write like a human with taste. Not a slogan generator.
+
+Few-shots (style to emulate, DO NOT copy):
+- Decide with daylight
+- Every acre accounted
+- Clarity at the gate
+- Figures before footsteps
+- Fewer guesses, better seasons
 
 Inputs:
-- Product: ${productName}
 - Audience: ${targetAudience}
 - Top pain: ${painPoints}
 - Core value: ${productBenefit}
-- Differentiator: ${differentiators}`
+- Differentiator: ${differentiators}
+- Nonce: ${Date.now()}`
             }
           ]
         }),
