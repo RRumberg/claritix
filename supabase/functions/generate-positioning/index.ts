@@ -46,25 +46,22 @@ serve(async (req) => {
             },
             {
               role: "user",
-              content: `You are a senior product marketer. Write ONE tight paragraph in April Dunford style.
+              content: `You are David Ogilvy meets April Dunford. Write ONE tight paragraph.
 
 Rules:
-- ≤55 words. Plain language. No buzzwords/superlatives.
-- CRITICAL: DO NOT name or reference any competitors or brands from the inputs. Even if competitor names are provided, IGNORE them completely.
-- NEVER write "Unlike [Brand]" or "compared to [Brand]" or mention any specific product/company names.
-- If contrast is needed, ONLY use neutral category phrasing: "compared with typical [category] tools" or "versus manual spreadsheet workflows".
-- Keep one concrete differentiator and, if available, a brief proof point.
+- ≤55 words. Plain language. No buzzwords (innovative, seamless, next-gen), no superlatives (best, fastest).
+- Lead with the buyer's felt moment (emotion/pain). Name the category clearly.
+- Do NOT name competitors. Use neutral contrast: "compared with typical [category] tools" or "versus manual spreadsheets".
+- State ONE concrete differentiator and, if available, a short proof fragment (metric, certification, named capability).
+- Return plain text only (no bullets/markdown).
 
-Example of what NOT to do: "Unlike PRIA, our product..." ❌
-Example of what TO do: "Compared with typical farm management tools..." ✅
-
-Structure (single paragraph):
-For [target customer] who [need/opportunity], the [product name] is a [category] that [key benefit]. Compared with typical [category] tools, it [primary differentiator + optional proof].
+Structure (flow as one paragraph):
+For [target customer] who [urgent situation/pain], the [product name] is a [category] that [specific outcome]. Compared with typical [category] tools, it [single differentiator + optional proof].
 
 Inputs:
 - Product Name: ${productName}
 - Target Audience: ${targetAudience}
-- Pain Points: ${painPoints}
+- Top 3 Pain Points: ${painPoints}
 - Product Benefit: ${productBenefit}
 - Differentiators: ${differentiators}
 - Proof Points (optional): (not provided)
