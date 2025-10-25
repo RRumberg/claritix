@@ -118,7 +118,7 @@ Inputs:
           messages: [
             {
               role: "user",
-              content: `Write 5 short, emotionally compelling taglines for ${productName}. Each should be under 10 words. Avoid formatting of any kind — do not bold, italicize, or number them. Just return clean, plain text lines separated by semicolons.
+              content: `Write 5 short, emotionally compelling taglines for ${productName}. Each should be under 10 words. Avoid formatting of any kind — do not bold, italicize, or number them. Do not use asterisks (**) or any markdown formatting. Just return clean, plain text lines separated by semicolons.
 
 Context:
 - Target Audience: ${targetAudience}
@@ -129,7 +129,7 @@ Context:
 Requirements:
 - Each tagline under 10 words
 - Emotionally compelling
-- No formatting, no numbers, no bullet points
+- No formatting whatsoever (no **, no *, no _, no numbers, no bullet points)
 - Plain text only
 - Separate with semicolons`
             }
@@ -258,9 +258,15 @@ Inputs:
       }
     }
 
-    const uvp = uvpData.choices?.[0]?.message?.content || "";
+    let uvp = uvpData.choices?.[0]?.message?.content || "";
     let tagline = taglineData.choices?.[0]?.message?.content || "";
-    const insights = insightsData.choices?.[0]?.message?.content || "";
+    let insights = insightsData.choices?.[0]?.message?.content || "";
+    
+    // Remove all ** markdown formatting from all outputs
+    positioning = positioning.replace(/\*\*/g, "");
+    uvp = uvp.replace(/\*\*/g, "");
+    tagline = tagline.replace(/\*\*/g, "");
+    insights = insights.replace(/\*\*/g, "");
     
     console.log("tagline_raw:", tagline);
     
