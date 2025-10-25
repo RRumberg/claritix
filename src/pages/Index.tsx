@@ -389,6 +389,20 @@ const Index = () => {
             </Card>
           </div>
         </div>
+
+        <footer className="mt-12 border-t pt-6 text-center">
+          <p className="text-sm text-muted-foreground">
+            © 2025{" "}
+            <a
+              href="https://www.linkedin.com/in/renerumberg/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-medium text-primary hover:underline"
+            >
+              Rene Rumberg
+            </a>
+          </p>
+        </footer>
       </div>
     </div>
   );
