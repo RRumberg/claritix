@@ -45,7 +45,7 @@ serve(async (req) => {
             },
             {
               role: "user",
-              content: `Create a positioning statement using this exact format:
+              content: `Write one paragraph in April Dunford style. Constraints: <=55 words, plain language, no buzzwords (innovative, seamless, next-gen), no superlatives (best, fastest). Return plain text only (no quotes, bullets, or markdown). Use this structure:
 
 For [target customer] who [need/opportunity], the [product name] is a [category] that [key benefit]. Unlike [primary competitor], our product [primary differentiator].
 
@@ -55,9 +55,7 @@ Inputs:
 - Pain Points: ${painPoints}
 - Product Benefit: ${productBenefit}
 - Competitors: ${competitors}
-- Differentiators: ${differentiators}
-
-Generate a concise positioning statement following the format above.`
+- Differentiators: ${differentiators}`
             }
           ]
         }),
