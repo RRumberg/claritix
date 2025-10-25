@@ -77,7 +77,7 @@ Inputs:
             },
             {
               role: "user",
-              content: `Write a concise Unique Value Proposition (max 25 words) using the context below.
+              content: `Return exactly ONE sentence, <=25 words. No adverbs like "seamlessly". Plain language.
 
 Inputs:
 - Product Name: ${productName}
@@ -85,9 +85,7 @@ Inputs:
 - Pain Points: ${painPoints}
 - Product Benefit: ${productBenefit}
 - Competitors: ${competitors}
-- Differentiators: ${differentiators}
-
-Generate a clear, benefit-focused UVP in 25 words or less.`
+- Differentiators: ${differentiators}`
             }
           ]
         }),
