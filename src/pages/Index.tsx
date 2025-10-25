@@ -153,7 +153,7 @@ const Index = () => {
       <div className="mx-auto max-w-7xl">
         <header className="mb-8">
           <h1 className="mb-2 text-4xl font-bold tracking-tight">
-            Claritix
+            ClaritiX
           </h1>
           <p className="text-base text-muted-foreground">
             Turn vague product descriptions into clear messaging that wins markets, not just meetings.
