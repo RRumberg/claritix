@@ -45,9 +45,16 @@ serve(async (req) => {
             },
             {
               role: "user",
-              content: `Write one paragraph in April Dunford style. Constraints: <=55 words, plain language, no buzzwords (innovative, seamless, next-gen), no superlatives (best, fastest). Return plain text only (no quotes, bullets, or markdown). Use this structure:
+              content: `You are a senior product marketer. Write ONE tight paragraph in April Dunford style.
 
-For [target customer] who [need/opportunity], the [product name] is a [category] that [key benefit]. Unlike [primary competitor], our product [primary differentiator].
+Rules:
+- ≤55 words. Plain language. No buzzwords (innovative, seamless, next-gen). No superlatives (best, fastest). No filler.
+- Lead with the buyer's situation and sharpest pain. Name the category clearly.
+- Contrast against the named competitor using ONE concrete differentiator (feature, workflow, data, or proof).
+- Where possible, include a credible proof point (metric, certification, customer).
+
+Structure to follow (but keep it flowing as one paragraph):
+For [target customer] who [need/opportunity], the [product name] is a [category] that [key benefit]. Unlike [primary competitor], our product [primary differentiator + mini proof if available].
 
 Inputs:
 - Product Name: ${productName}
