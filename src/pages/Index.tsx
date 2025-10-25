@@ -392,7 +392,7 @@ const Index = () => {
 
         <footer className="mt-12 border-t pt-6 text-center">
           <p className="text-sm text-muted-foreground">
-            © 2025{" "}
+            © 2025 Built by{" "}
             <a
               href="https://www.linkedin.com/in/renerumberg/"
               target="_blank"
