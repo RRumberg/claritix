@@ -25,6 +25,7 @@ const Index = () => {
   const [positioning, setPositioning] = useState("");
   const [uvp, setUvp] = useState("");
   const [tagline, setTagline] = useState("");
+  const [insights, setInsights] = useState("");
 
   const handleGenerate = async () => {
     // Validation
@@ -78,6 +79,7 @@ const Index = () => {
       setPositioning(data.positioning);
       setUvp(data.uvp);
       setTagline(data.tagline);
+      setInsights(data.insights);
 
       toast({
         title: "Success!",
@@ -330,10 +332,14 @@ const Index = () => {
               <h3 className="mb-4 text-xl font-semibold text-primary">
                 AI-powered insights
               </h3>
-              <div className="min-h-[80px] rounded-lg bg-muted/50 p-4">
-                <p className="leading-relaxed text-foreground">
-                  Fill out the product information form to generate professional marketing messages tailored to your product and audience.
-                </p>
+              <div className="min-h-[120px] rounded-lg bg-muted/50 p-4">
+                {insights ? (
+                  <p className="leading-relaxed text-foreground">{insights}</p>
+                ) : (
+                  <p className="text-muted-foreground italic">
+                    Fill out the product information form to generate professional marketing messages tailored to your product and audience.
+                  </p>
+                )}
               </div>
             </Card>
           </div>

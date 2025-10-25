@@ -27,8 +27,8 @@ serve(async (req) => {
 
     console.log("Generating positioning outputs for:", productName);
 
-    // Generate all three outputs in parallel
-    const [positioningResponse, uvpResponse, taglineResponse] = await Promise.all([
+    // Generate all four outputs in parallel
+    const [positioningResponse, uvpResponse, taglineResponse, insightsResponse] = await Promise.all([
       // Positioning Statement
       fetch("https://ai.gateway.lovable.dev/v1/chat/completions", {
         method: "POST",
@@ -140,10 +140,48 @@ Inputs:
           ]
         }),
       }),
+
+      // Strategic Insights
+      fetch("https://ai.gateway.lovable.dev/v1/chat/completions", {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${LOVABLE_API_KEY}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          model: "google/gemini-2.5-flash",
+          messages: [
+            {
+              role: "system",
+              content: "You're a brand strategist trained in positioning frameworks (April Dunford) and copywriting (David Ogilvy, Eugene Schwartz). Provide strategic insights in a clear, thoughtful voice - think senior strategist giving clear feedback in a pitch workshop. No AI voice. Keep it under 100 words."
+            },
+            {
+              role: "user",
+              content: `Based on the following company input, provide a brief insight summary explaining:
+
+1. What this company appears to be offering.
+2. What emotional or strategic angle seems strongest (and why).
+3. How the Positioning Statement, UVP, and Tagline might be refined based on this.
+4. One key message or phrase they could elevate.
+5. Optional: one thing they may be missing or underselling.
+
+Company Information:
+- Product Name: ${productName}
+- Target Audience: ${targetAudience}
+- Top 3 Pain Points: ${painPoints}
+- Product Benefit: ${productBenefit}
+- Key Competitors: ${competitors}
+- Differentiators: ${differentiators}
+
+Provide strategic insights in under 100 words.`
+            }
+          ]
+        }),
+      }),
     ]);
 
     // Check for rate limiting or payment errors
-    if (positioningResponse.status === 429 || uvpResponse.status === 429 || taglineResponse.status === 429) {
+    if (positioningResponse.status === 429 || uvpResponse.status === 429 || taglineResponse.status === 429 || insightsResponse.status === 429) {
       console.error("Rate limit exceeded");
       return new Response(
         JSON.stringify({ error: "Rate limit exceeded. Please try again in a moment." }), 
@@ -154,7 +192,7 @@ Inputs:
       );
     }
 
-    if (positioningResponse.status === 402 || uvpResponse.status === 402 || taglineResponse.status === 402) {
+    if (positioningResponse.status === 402 || uvpResponse.status === 402 || taglineResponse.status === 402 || insightsResponse.status === 402) {
       console.error("Payment required");
       return new Response(
         JSON.stringify({ error: "AI credits depleted. Please add funds to continue." }), 
@@ -165,19 +203,21 @@ Inputs:
       );
     }
 
-    if (!positioningResponse.ok || !uvpResponse.ok || !taglineResponse.ok) {
+    if (!positioningResponse.ok || !uvpResponse.ok || !taglineResponse.ok || !insightsResponse.ok) {
       console.error("AI gateway error:", {
         positioning: positioningResponse.status,
         uvp: uvpResponse.status,
-        tagline: taglineResponse.status
+        tagline: taglineResponse.status,
+        insights: insightsResponse.status
       });
       throw new Error("AI gateway error");
     }
 
-    const [positioningData, uvpData, taglineData] = await Promise.all([
+    const [positioningData, uvpData, taglineData, insightsData] = await Promise.all([
       positioningResponse.json(),
       uvpResponse.json(),
       taglineResponse.json(),
+      insightsResponse.json(),
     ]);
 
     let positioning = positioningData.choices?.[0]?.message?.content || "";
@@ -224,6 +264,7 @@ Inputs:
 
     const uvp = uvpData.choices?.[0]?.message?.content || "";
     let tagline = taglineData.choices?.[0]?.message?.content || "";
+    const insights = insightsData.choices?.[0]?.message?.content || "";
     
     console.log("tagline_raw:", tagline);
     
@@ -238,6 +279,7 @@ Inputs:
         positioning,
         uvp,
         tagline,
+        insights,
       }),
       {
         headers: { ...corsHeaders, "Content-Type": "application/json" },
