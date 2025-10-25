@@ -169,15 +169,15 @@ const Index = () => {
           {/* Input Section */}
           <Card className="p-6 shadow-sm">
             <h2 className="mb-6 flex items-center gap-2 text-xl font-semibold">
-              <span>✨</span>
               Product Information
+              <span>✨</span>
             </h2>
             
             <div className="space-y-4">
               <div className="space-y-2">
                 <Label htmlFor="productName" className="flex items-center gap-2">
-                  <span>⚡</span>
                   Product Name
+                  <span>⚡</span>
                 </Label>
                 <Input
                   id="productName"
@@ -189,8 +189,8 @@ const Index = () => {
 
               <div className="space-y-2">
                 <Label htmlFor="targetAudience" className="flex items-center gap-2">
-                  <span>😊</span>
                   Target Audience
+                  <span>😊</span>
                 </Label>
                 <Input
                   id="targetAudience"
@@ -202,8 +202,8 @@ const Index = () => {
 
               <div className="space-y-2">
                 <Label htmlFor="painPoints" className="flex items-center gap-2">
-                  <span>⚠️</span>
                   Top 3 Pain Points
+                  <span>⚠️</span>
                 </Label>
                 <Textarea
                   id="painPoints"
@@ -217,8 +217,8 @@ const Index = () => {
 
               <div className="space-y-2">
                 <Label htmlFor="productBenefit" className="flex items-center gap-2">
-                  <span>🚀</span>
                   Product Benefit
+                  <span>📈</span>
                 </Label>
                 <Textarea
                   id="productBenefit"
@@ -232,8 +232,8 @@ const Index = () => {
 
               <div className="space-y-2">
                 <Label htmlFor="competitors" className="flex items-center gap-2">
-                  <span>🏆</span>
                   Key Competitors
+                  <span>🏆</span>
                 </Label>
                 <Input
                   id="competitors"
@@ -245,8 +245,8 @@ const Index = () => {
 
               <div className="space-y-2">
                 <Label htmlFor="differentiators" className="flex items-center gap-2">
-                  <span>✨</span>
                   Differentiators
+                  <span>✨</span>
                 </Label>
                 <Textarea
                   id="differentiators"
