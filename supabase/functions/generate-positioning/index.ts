@@ -49,7 +49,7 @@ serve(async (req) => {
 
 Rules:
 - ≤55 words. Plain language. No buzzwords/superlatives.
-- DO NOT name competitors or critique them.
+- DO NOT name competitors or critique them. If the inputs include brand names, still DO NOT mention them. Use "compared with typical [category] tools" instead. Never use "Unlike <brand>".
 - Use neutral category contrast only: say "compared with typical [category] tools" or "versus manual/spreadsheet workflows".
 - Keep a single, concrete differentiator and (if available) a brief proof fragment.
 
