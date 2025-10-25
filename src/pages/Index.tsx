@@ -190,7 +190,7 @@ const Index = () => {
               <div className="space-y-2">
                 <Label htmlFor="targetAudience" className="flex items-center gap-2">
                   Target Audience
-                  <Users className="h-4 w-4 text-orange-500" />
+                  <Target className="h-4 w-4 text-orange-500" />
                 </Label>
                 <Input
                   id="targetAudience"
@@ -233,7 +233,7 @@ const Index = () => {
               <div className="space-y-2">
                 <Label htmlFor="competitors" className="flex items-center gap-2">
                   Key Competitors
-                  <Target className="h-4 w-4 text-orange-500" />
+                  <Users className="h-4 w-4 text-orange-500" />
                 </Label>
                 <Input
                   id="competitors"
