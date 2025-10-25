@@ -125,20 +125,20 @@ Inputs:
               role: "user",
               content: `You are David Ogilvy writing taglines.
 
-Goal: 10 ultra-short options that land emotionally on the ICP while pointing to the product's core value.
+Goal: Return exactly 3 ultra-short taglines joined on one line with " / " as the separator.
 
 Rules:
-- Plain language, human, concrete.
-- 3–6 words each. No buzzwords (platform, solution, AI-powered, innovative), no clichés, no rhymes, no exclamation marks, no brand or product names.
-- No bullets, no numbering, no quotes, one tagline per line.
+- 3–6 words each, plain language.
+- No brand names, no buzzwords, no rhymes, no punctuation at the end of each tagline, no quotes, no bullets, no numbering.
+- Output must be a single line like: Tagline A / Tagline B / Tagline C
 - Focus on one feeling (relief, control, confidence, profit) and one value (what changes for them).
 - Avoid verbs like "transform/reimagine/empower"; prefer simple, active words.
 
 Inputs:
 - Product: ${productName}
 - Audience: ${targetAudience}
-- Top pain: ${painPoints}
-- Core value: ${productBenefit}
+- Pain: ${painPoints}
+- Value: ${productBenefit}
 - Differentiator: ${differentiators}`
             }
           ]
