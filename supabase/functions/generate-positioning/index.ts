@@ -118,24 +118,20 @@ Inputs:
           messages: [
             {
               role: "user",
-              content: `Context: The brand stands for ${differentiators}. Our audience feels ${painPoints}, and our product helps them ${productBenefit}.
+              content: `Write 5 short, emotionally compelling taglines for ${productName}. Each should be under 10 words. Avoid formatting of any kind — do not bold, italicize, or number them. Just return clean, plain text lines separated by semicolons.
 
-Task: Write a **Tagline** in the tone of classic advertising legends. It should be short (3–6 words), emotionally sticky, and worthy of living on a billboard.
-
-Guidelines:
-- Capture the soul of the product in the fewest words possible.
-- Make it sound timeless — like it's always been true.
-- Avoid trendy or techy language. Go for feeling and clarity.
-- Echo the tone of Nike's "Just Do It" or Apple's "Think Different."
-
-Constraints:
-Maximum 6 words. Output 5 options, separated with ;
-
-Inputs:
+Context:
 - Target Audience: ${targetAudience}
-- Top pain: ${painPoints}
-- Core value: ${productBenefit}
-- Differentiator: ${differentiators}`
+- Pain Points: ${painPoints}
+- Product Benefit: ${productBenefit}
+- Differentiators: ${differentiators}
+
+Requirements:
+- Each tagline under 10 words
+- Emotionally compelling
+- No formatting, no numbers, no bullet points
+- Plain text only
+- Separate with semicolons`
             }
           ]
         }),
