@@ -107,15 +107,13 @@ Inputs:
             },
             {
               role: "user",
-              content: `Write a 1-sentence, catchy tagline that reflects the unique positioning. Tone: confident and professional.
+              content: `Return 3 options as a bulleted list. Each <=8 words. Confident, professional. No rhymes or clichés.
 
 Inputs:
 - Product Name: ${productName}
 - Target Audience: ${targetAudience}
 - Product Benefit: ${productBenefit}
-- Differentiators: ${differentiators}
-
-Generate a single-sentence tagline with a confident and professional tone.`
+- Differentiators: ${differentiators}`
             }
           ]
         }),
