@@ -163,7 +163,7 @@ const Index = () => {
                   ClaritiX
                 </h1>
                 <p className="mt-2 text-base text-muted-foreground">
-                  Turn vague product descriptions into clear messaging that wins markets, not just meetings.
+                  The why behind your words. Know what's working - and what to push harder.
                 </p>
               </div>
             </div>
