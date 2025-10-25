@@ -158,7 +158,7 @@ const Index = () => {
             Positioning Engine
           </h1>
           <p className="text-lg text-muted-foreground">
-            Transform your product insights into strategic positioning
+            Turn vague product descriptions into messaging that wins markets, not just meetings.
           </p>
         </header>
 
