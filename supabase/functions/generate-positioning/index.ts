@@ -233,40 +233,129 @@ Inputs:
     const uvp = uvpData.choices?.[0]?.message?.content || "";
     let tagline = taglineData.choices?.[0]?.message?.content || "";
     
-    // Sanitize tagline to ensure proper formatting
-    const taglineSanitizeResponse = await fetch("https://ai.gateway.lovable.dev/v1/chat/completions", {
-      method: "POST",
-      headers: {
-        Authorization: `Bearer ${LOVABLE_API_KEY}`,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        model: "google/gemini-2.5-flash",
-        temperature: 0.2,
-        messages: [
-          {
-            role: "system",
-            content: "You format taglines into a single line."
-          },
-          {
-            role: "user",
-            content: `Take the Tagline output, extract the strongest three SHORT lines, remove any punctuation and extra words so each is 3–5 words, then return ONE SINGLE LINE joined with " / ".
+    console.log("tagline_raw_length:", tagline.length);
+    
+    // Deterministic tagline formatter
+    function formatTaglines(raw: string, competitors: string): string {
+      const brandTokens = new Set(
+        competitors
+          .toLowerCase()
+          .replace(/[^a-z0-9\s]/g, " ")
+          .split(/\s+/)
+          .filter(Boolean)
+      );
+      const buzzwords = new Set(["innovative","seamless","nextgen","next-gen","revolutionary","cuttingedge","cutting-edge","transform","empower","synergy","leverage","reimagine","reimagination"]);
+      const emotionWords = new Set(["relief","control","confident","confidence","profit","clarity","simple","easy","easily","smarter","faster","calm","clean","clear"]);
 
-Rules: no brand names, no buzzwords, no punctuation, no newlines, no extra text.
+      // Split into candidates by common separators and punctuation
+      const parts = raw
+        .replace(/\n+/g, " ")
+        .split(/[•·\u2022|/;]|[.?!]+|—|–|,|\|/g)
+        .map(s => s.replace(/["'""''(){}\[\]-]/g, " "))
+        .flatMap(s => s.split(/[\n\r]+/))
+        .map(s => s.replace(/\s+/g, " ").trim())
+        .filter(Boolean);
 
-Input: ${tagline}`
-          }
-        ]
-      }),
-    });
-
-    if (taglineSanitizeResponse.ok) {
-      const taglineSanitizeData = await taglineSanitizeResponse.json();
-      const sanitizedTagline = taglineSanitizeData.choices?.[0]?.message?.content;
-      if (sanitizedTagline) {
-        tagline = sanitizedTagline;
+      function cleanCandidate(s: string): string {
+        let t = s.replace(/[.,!?;:/"'""''(){}\[\]-]/g, " ");
+        t = t.replace(/\s+/g, " ").trim();
+        return t;
       }
+
+      function hasBuzz(s: string): boolean {
+        const t = s.toLowerCase().replace(/[^a-z0-9\s]/g,"");
+        return t.split(/\s+/).some(w => buzzwords.has(w));
+      }
+
+      function stripBrands(s: string): string {
+        const words = s.split(/\s+/);
+        const kept = words.filter(w => !brandTokens.has(w.toLowerCase()));
+        return kept.join(" ").trim();
+      }
+
+      function to3to5Words(s: string): string | null {
+        const words = s.split(/\s+/).filter(Boolean);
+        if (words.length < 3) return null;
+        const trimmed = words.slice(0, 5);
+        if (trimmed.length < 3) return null;
+        return trimmed.join(" ");
+      }
+
+      const candidates: string[] = [];
+      for (let p of parts) {
+        let c = cleanCandidate(p);
+        if (!c) continue;
+        if (hasBuzz(c)) continue;
+        c = stripBrands(c);
+        if (!c) continue;
+        c = cleanCandidate(c);
+        const limited = to3to5Words(c);
+        if (!limited) continue;
+        candidates.push(limited);
+      }
+
+      // De-duplicate candidates
+      const uniq = Array.from(new Set(candidates.map(c => c.toLowerCase()))).map(u => candidates.find(c => c.toLowerCase() === u)!);
+
+      // Scoring: prefer 4 words, then emotional words
+      function score(c: string): number {
+        const ws = c.toLowerCase().split(/\s+/);
+        const lenScore = -Math.abs(ws.length - 4);
+        const emo = ws.reduce((acc,w) => acc + (emotionWords.has(w) ? 1 : 0), 0);
+        return lenScore * 10 + emo;
+      }
+
+      const sorted = uniq.sort((a,b) => score(b) - score(a));
+
+      // Select with no repeated words across taglines
+      const used = new Set<string>();
+      const chosen: string[] = [];
+      for (const cand of sorted) {
+        const tokens = cand.toLowerCase().split(/\s+/);
+        const overlaps = tokens.some((t: string) => used.has(t));
+        if (!overlaps) {
+          chosen.push(cand);
+          tokens.forEach((t: string) => used.add(t));
+        }
+        if (chosen.length === 3) break;
+      }
+
+      // Relaxation if needed
+      if (chosen.length < 3) {
+        for (const cand of sorted) {
+          if (chosen.includes(cand)) continue;
+          chosen.push(cand);
+          if (chosen.length === 3) break;
+        }
+      }
+
+      // Final fallback if still <3
+      while (chosen.length < 3) {
+        const fallback = sorted[chosen.length] || "grow your value";
+        if (!chosen.includes(fallback)) {
+          chosen.push(fallback);
+        } else {
+          chosen.push("achieve your goals");
+        }
+      }
+
+      // Final clean: ensure no punctuation and 3–5 words
+      const final = chosen.map(c => {
+        let t = c.replace(/[^\w\s]/g, " ").replace(/\s+/g, " ").trim();
+        const words = t.split(/\s+/).slice(0,5);
+        if (words.length < 3) {
+          while (words.length < 3) words.push(words[words.length - 1] || "value");
+        }
+        return words.join(" ");
+      });
+
+      const joined = final.slice(0,3).join(" / ");
+      return joined.replace(/\n+/g, " ").trim();
     }
+    
+    // Apply deterministic formatter
+    tagline = formatTaglines(tagline, competitors);
+    console.log("tagline_formatted:", tagline);
 
     console.log("Successfully generated all positioning outputs");
 
