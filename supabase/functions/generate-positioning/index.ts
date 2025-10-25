@@ -181,7 +181,48 @@ Inputs:
       taglineResponse.json(),
     ]);
 
-    const positioning = positioningData.choices?.[0]?.message?.content || "";
+    let positioning = positioningData.choices?.[0]?.message?.content || "";
+    
+    // Sanitize positioning to remove any brand names
+    const sanitizeResponse = await fetch("https://ai.gateway.lovable.dev/v1/chat/completions", {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${LOVABLE_API_KEY}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        model: "google/gemini-2.5-flash",
+        temperature: 0.2,
+        messages: [
+          {
+            role: "system",
+            content: "You sanitize marketing copy by removing brand names."
+          },
+          {
+            role: "user",
+            content: `If the text contains any brand or product names, rewrite it to remove or generalize them.
+
+Use neutral contrast ("compared with typical [category] tools" or "versus manual spreadsheets"). Keep ≤55 words, plain language, same meaning, no buzzwords/superlatives.
+
+Return plain text only.
+
+Inputs:
+- Draft: ${positioning}
+- Possible brand list: ${competitors}
+- Category hint: ${competitors}`
+          }
+        ]
+      }),
+    });
+
+    if (sanitizeResponse.ok) {
+      const sanitizeData = await sanitizeResponse.json();
+      const sanitized = sanitizeData.choices?.[0]?.message?.content;
+      if (sanitized) {
+        positioning = sanitized;
+      }
+    }
+
     const uvp = uvpData.choices?.[0]?.message?.content || "";
     const tagline = taglineData.choices?.[0]?.message?.content || "";
 
