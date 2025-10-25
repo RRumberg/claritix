@@ -125,19 +125,23 @@ Inputs:
               role: "user",
               content: `You are David Ogilvy writing taglines.
 
-Goal: Return exactly 3 ultra-short taglines joined on one line with " / " as the separator.
+Return EXACTLY three taglines as ONE SINGLE LINE with " / " as the separator.
 
-Rules:
-- 3–6 words each, plain language.
-- No brand names, no buzzwords, no rhymes, no punctuation at the end of each tagline, no quotes, no bullets, no numbering.
-- Output must be a single line like: Tagline A / Tagline B / Tagline C
-- Focus on one feeling (relief, control, confidence, profit) and one value (what changes for them).
-- Avoid verbs like "transform/reimagine/empower"; prefer simple, active words.
+Output must contain no newlines and no extra text.
+
+Each tagline must:
+- be 3–5 words
+- use plain language, emotional
+- NO punctuation (no periods, commas, dashes, quotes)
+- NO brand names, NO buzzwords/clichés/rhymes
+- NO words repeated across taglines
+
+FORMAT (single line only):
+Tagline A / Tagline B / Tagline C
 
 Inputs:
-- Product: ${productName}
 - Audience: ${targetAudience}
-- Pain: ${painPoints}
+- Top pain: ${painPoints}
 - Value: ${productBenefit}
 - Differentiator: ${differentiators}`
             }
