@@ -111,15 +111,15 @@ Generate a clear, benefit-focused UVP in 25 words or less.`
             },
             {
               role: "user",
-              content: `Create a tagline for this product:
+              content: `Write a 1-sentence, catchy tagline that reflects the unique positioning. Tone: confident and professional.
 
-Product: ${productName}
-Target Audience: ${targetAudience}
-Pain Points: ${painPoints}
-Product Benefit: ${productBenefit}
-Differentiators: ${differentiators}
+Inputs:
+- Product Name: ${productName}
+- Target Audience: ${targetAudience}
+- Product Benefit: ${productBenefit}
+- Differentiators: ${differentiators}
 
-Create a memorable, concise tagline (3-7 words) that captures the essence and emotional benefit of the product. Make it catchy and memorable.`
+Generate a single-sentence tagline with a confident and professional tone.`
             }
           ]
         }),
