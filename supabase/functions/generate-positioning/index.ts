@@ -111,47 +111,29 @@ Inputs:
           messages: [
             {
               role: "user",
-              content: `You are David Ogilvy of writing taglines.
+              content: `You are David Ogilvy writing taglines.
 
-TASK
-Return EXACTLY five taglines, separated with " / ". Output must contain no newlines and no extra text.
+Write exactly THREE taglines, one per line (no bullets, no numbering, no quotes, no punctuation at the end). Each line must be 3–5 words, plain language, memorable, and grounded in a concrete image.
 
-HARD RULES
-- 3–5 words per tagline
-- Plain language, human, memorable
-- NO punctuation, NO quotes, NO bullets, NO numbering
-- NO brand or product names
-- Each line must include ONE concrete noun or image (e.g., map, ledger, signal, field, gate, season, acre, row, dashboard)
-- Prefer strong verb + concrete noun ("verb the noun") or "noun + noun"
-- Do not repeat the same main verb or the same main noun across the five lines
-- If any line violates rules or feels generic, regenerate it until all five pass
+Voice & taste:
+- Sound like a human with taste, not a slogan generator.
+- Aim at one emotion (relief, control, confidence, pride) and one concrete outcome.
+- Use concrete nouns or images (e.g., map, boots, gate, ledger, signal, season, acre, row, dust, rain, dashboard).
+- Prefer strong verb + concrete noun ("verb the noun") or "noun + noun".
 
-TASTE (Ogilvy vibe)
-- Aim at ONE emotion (relief, control, confidence, pride)
-- Point to ONE real value (time back, fewer errors, faster decisions, better seasons)
-- Write like a human with taste. Not a slogan generator.
+Do NOT:
+- Do not include product or brand names.
+- Do not use buzzwords (platform, solution, AI-powered, innovative, optimize, transform).
+- Do not use the words: grow, value, goals, achieve, future, simply, better, data, clarity, smarter, trust.
+- Do not repeat the same main verb or the same main noun across the three lines.
 
-FEW-SHOT STYLE (emulate tone only; DO NOT copy words)
-- Decide with daylight
-- Every acre accounted
-- Figures before footsteps
-- Signals over guesses
-- Map, then move
+Format: Return plain text only, exactly three lines, each a separate tagline, no extra text.
 
-FORMAT (single line only)
-Tagline A / Tagline B / Tagline C / Tagline D / Tagline E
-
-INPUTS
+Inputs:
 - Audience: ${targetAudience}
 - Top pain: ${painPoints}
 - Core value: ${productBenefit}
-- Differentiator: ${differentiators}
-- Desired emotion (optional): (not provided)
-- Moment of use (optional): (not provided)
-- Nonce: ${Date.now()}
-
-CONSTRAINT ENFORCER
-If fewer than five valid lines are produced, synthesise new ones that satisfy every rule. Return exactly five, single line, " / " separated.`
+- Differentiator: ${differentiators}`
             }
           ]
         }),
