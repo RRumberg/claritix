@@ -78,17 +78,25 @@ Inputs:
           messages: [
             {
               role: "user",
-              content: `You are David Ogilvy writing a UVP.
+              content: `Context: The product is ${productName} for ${targetAudience}, and solves ${painPoints} in a way that ${differentiators}.
 
-Write exactly ONE sentence, ≤22 words. Plain, concrete, memorable. Name the ICP, the single outcome they value most, and ONE differentiator that makes it credible. No buzzwords/superlatives/adverbs; no competitor mentions; return plain text only.
+Task: Craft a **Unique Value Proposition** that captures the *emotional and functional value* in one clear, bold sentence — the kind that could go on a homepage hero banner.
+
+Guidelines:
+- Follow copywriting principles: benefit first, logic second.
+- Channel classic Ogilvy copy: punchy, real, irresistible.
+- Make it sound like a promise that feels true and urgent.
+- Avoid abstract claims — be visceral and specific.
+
+Constraints:
+Keep each version under 15 words. No fluff. Give me 3 variations, each with a distinct emotional hook.
 
 Inputs:
 - Product Name: ${productName}
 - Target Audience: ${targetAudience}
 - Top 3 Pain Points: ${painPoints}
 - Product Benefit: ${productBenefit}
-- Differentiators: ${differentiators}
-- Proof Points (optional): (not provided)`
+- Differentiators: ${differentiators}`
             }
           ]
         }),
