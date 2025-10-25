@@ -11,6 +11,7 @@ import { Loader2, Sparkles } from "lucide-react";
 const Index = () => {
   const { toast } = useToast();
   const [isLoading, setIsLoading] = useState(false);
+  const [isAirtableLoading, setIsAirtableLoading] = useState(false);
   
   // Input fields
   const [productName, setProductName] = useState("");
@@ -91,6 +92,57 @@ const Index = () => {
       });
     } finally {
       setIsLoading(false);
+    }
+  };
+
+  const handleSendToAirtable = async () => {
+    if (!positioning || !uvp || !tagline) {
+      toast({
+        title: "Missing Data",
+        description: "Please generate positioning outputs first",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    setIsAirtableLoading(true);
+
+    try {
+      const response = await fetch("https://hook.eu2.make.com/a6ya7fmx4z3v2k04lt4qtbn0yj9a3z4w", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          product_name: productName,
+          target_audience: targetAudience,
+          pain_points: painPoints,
+          benefit: productBenefit,
+          competitors: competitors,
+          differentiators: differentiators,
+          positioning_statement: positioning,
+          uvp: uvp,
+          tagline: tagline,
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to send data");
+      }
+
+      toast({
+        title: "Success!",
+        description: "Data sent to Airtable successfully",
+      });
+    } catch (error) {
+      console.error("Error sending to Airtable:", error);
+      toast({
+        title: "Error",
+        description: "Failed to send data to Airtable. Please try again.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsAirtableLoading(false);
     }
   };
 
@@ -203,6 +255,23 @@ const Index = () => {
                     <Sparkles className="mr-2 h-5 w-5" />
                     Generate
                   </>
+                )}
+              </Button>
+
+              <Button
+                onClick={handleSendToAirtable}
+                disabled={isAirtableLoading || !positioning}
+                variant="outline"
+                className="w-full shadow-lg transition-all hover:shadow-xl disabled:opacity-50"
+                size="lg"
+              >
+                {isAirtableLoading ? (
+                  <>
+                    <Loader2 className="mr-2 h-5 w-5 animate-spin" />
+                    Sending...
+                  </>
+                ) : (
+                  "Send to Airtable"
                 )}
               </Button>
             </div>
