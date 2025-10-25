@@ -89,6 +89,7 @@ Inputs:
 
 Rules:
 - Plain, specific. No buzzwords/superlatives/adverbs ("seamlessly").
+- BANNED WORDS: innovative, seamless, cutting-edge, next-gen, reimagine, transform, world-class, best-in-class, empower, robust, at scale, leverage, optimize (unless tied to a metric).
 - Include the ICP, the one job/outcome they care about most, and the single differentiator that makes it credible.
 - Prefer verbs over adjectives. Add a light proof fragment if available.
 
