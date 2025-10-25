@@ -84,14 +84,18 @@ Inputs:
             },
             {
               role: "user",
-              content: `Return exactly ONE sentence, <=25 words. No adverbs like "seamlessly". Plain language.
+              content: `You are a senior product marketer. Write exactly ONE sentence, ≤25 words.
+
+Rules:
+- Plain, specific. No buzzwords/superlatives/adverbs ("seamlessly").
+- Include the ICP, the one job/outcome they care about most, and the single differentiator that makes it credible.
+- Prefer verbs over adjectives. Add a light proof fragment if available.
 
 Inputs:
 - Product Name: ${productName}
 - Target Audience: ${targetAudience}
 - Pain Points: ${painPoints}
 - Product Benefit: ${productBenefit}
-- Competitors: ${competitors}
 - Differentiators: ${differentiators}`
             }
           ]
