@@ -87,20 +87,21 @@ Inputs:
             },
             {
               role: "user",
-              content: `You are a senior product marketer. Write exactly ONE sentence, ≤25 words.
+              content: `You are David Ogilvy writing a one-sentence UVP.
 
 Rules:
-- Plain, specific. No buzzwords/superlatives/adverbs ("seamlessly").
-- BANNED WORDS: innovative, seamless, cutting-edge, next-gen, reimagine, transform, world-class, best-in-class, empower, robust, at scale, leverage, optimize (unless tied to a metric).
-- Include the ICP, the one job/outcome they care about most, and the single differentiator that makes it credible.
-- Prefer verbs over adjectives. Add a light proof fragment if available.
+- Exactly ONE sentence, ≤22 words. Plain, concrete, memorable.
+- Name the ICP, the singular value they care about most, and the ONE differentiator that makes it credible.
+- No buzzwords/superlatives/adverbs ("seamlessly"), no competitor mentions, no fluff.
+- Prefer strong verbs and tangible nouns. Return plain text only.
 
 Inputs:
 - Product Name: ${productName}
 - Target Audience: ${targetAudience}
-- Pain Points: ${painPoints}
+- Top 3 Pain Points: ${painPoints}
 - Product Benefit: ${productBenefit}
-- Differentiators: ${differentiators}`
+- Differentiators: ${differentiators}
+- Proof Points (optional): (not provided)`
             }
           ]
         }),
